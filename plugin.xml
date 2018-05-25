@@ -1,0 +1,96 @@
+<?xml version="1.0" ?>
+<plugin id="com.mirasense.scanditsdk.plugin" version="5.7.2" xmlns="http://www.phonegap.com/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+  <name>ScanditBarcodeScanner</name>
+  <engines>
+    <engine name="cordova-android" version="&gt;=4.0"/>
+  </engines>
+  <js-module name="Barcode" src="src/barcode.js">
+    <clobbers target="Scandit.Barcode"/>
+  </js-module>
+  <js-module name="BarcodePicker" src="src/barcodepicker.js">
+    <clobbers target="Scandit.BarcodePicker"/>
+  </js-module>
+  <js-module name="Callbacks" src="src/callbacks.js">
+    <clobbers target="Scandit.Callbacks"/>
+  </js-module>
+  <js-module name="License" src="src/license.js">
+    <clobbers target="Scandit.License"/>
+  </js-module>
+  <js-module name="Margins" src="src/margins.js">
+    <clobbers target="Scandit.Margins"/>
+  </js-module>
+  <js-module name="Point" src="src/point.js">
+    <clobbers target="Scandit.Point"/>
+  </js-module>
+  <js-module name="Quadrilateral" src="src/quadrilateral.js">
+    <clobbers target="Scandit.Quadrilateral"/>
+  </js-module>
+  <js-module name="TextRecognitionSettings" src="src/textrecognitionsettings.js">
+    <clobbers target="Scandit.TextRecognitionSettings"/>
+  </js-module>
+  <js-module name="RecognizedText" src="src/recognizedtext.js">
+    <clobbers target="Scandit.RecognizedText"/>
+  </js-module>
+  <js-module name="Rect" src="src/rect.js">
+    <clobbers target="Scandit.Rect"/>
+  </js-module>
+  <js-module name="ScanOverlay" src="src/overlay.js">
+    <clobbers target="Scandit.ScanOverlay"/>
+  </js-module>
+  <js-module name="ScanSession" src="src/session.js">
+    <clobbers target="Scandit.ScanSession"/>
+  </js-module>
+  <js-module name="MatrixScanSession" src="src/matrixScanSession.js">
+    <clobbers target="Scandit.MatrixScanSession"/>
+  </js-module>
+  <js-module name="ScanSettings" src="src/settings.js">
+    <clobbers target="Scandit.ScanSettings"/>
+  </js-module>
+  <js-module name="SymbologySettings" src="src/symbologysettings.js">
+    <clobbers target="Scandit.SymbologySettings"/>
+  </js-module>
+  <js-module name="ScanCase" src="src/scancase.js">
+    <clobbers target="Scandit.ScanCase"/>
+  </js-module>
+  <js-module name="Constraints" src="src/constraints.js">
+    <clobbers target="Scandit.Constraints"/>
+  </js-module>
+  <platform name="android">
+    <!-- register plugin -->
+    <config-file parent="/widget" target="res/xml/config.xml">
+      <feature name="ScanditSDK">
+        <param name="android-package" value="com.mirasense.scanditsdk.plugin.ScanditSDK"/>
+      </feature>
+    </config-file>
+    <!-- add permissions in AndroidManifest.xml file-->
+    <config-file parent="/manifest" target="AndroidManifest.xml">
+      <uses-permission android:name="android.permission.CAMERA"/>
+      <uses-permission android:name="android.permission.VIBRATE"/>
+      <uses-permission android:name="android.permission.INTERNET"/>
+    </config-file>
+    <!-- add ScanditSDK Activity to the "application" section of AndroidManifest.xml file -->
+    <config-file parent="/manifest/application" target="AndroidManifest.xml">
+      <activity android:configChanges="orientation|screenSize" android:name="com.mirasense.scanditsdk.plugin.FullScreenPickerActivity"/>
+    </config-file>
+    <!-- The .so/.jar and resources are all contained in the ScanditBarcodeScanner.aar file, which we reference from build.gradle -->
+    <framework custom="true" src="src/android/build.gradle" type="gradleReference"/>
+    <resource-file src="src/android/sbs-android_5.7.2/ScanditBarcodeScanner.aar" target="libs/ScanditBarcodeScanner.aar"/>
+    <!-- These source files contain the Android-specific implementation of the Cordova/Phonegap plugin -->
+    <source-file src="src/android/com/mirasense/scanditsdk/plugin/BarcodePickerWithSearchBar.java" target-dir="src/com/mirasense/scanditsdk/plugin"/>
+    <source-file src="src/android/com/mirasense/scanditsdk/plugin/FullScreenPickerActivity.java" target-dir="src/com/mirasense/scanditsdk/plugin"/>
+    <source-file src="src/android/com/mirasense/scanditsdk/plugin/FullscreenPickerController.java" target-dir="src/com/mirasense/scanditsdk/plugin"/>
+    <source-file src="src/android/com/mirasense/scanditsdk/plugin/IPickerController.java" target-dir="src/com/mirasense/scanditsdk/plugin"/>
+    <source-file src="src/android/com/mirasense/scanditsdk/plugin/Marshal.java" target-dir="src/com/mirasense/scanditsdk/plugin"/>
+    <source-file src="src/android/com/mirasense/scanditsdk/plugin/PhonegapParamParser.java" target-dir="src/com/mirasense/scanditsdk/plugin"/>
+    <source-file src="src/android/com/mirasense/scanditsdk/plugin/PickerControllerBase.java" target-dir="src/com/mirasense/scanditsdk/plugin"/>
+    <source-file src="src/android/com/mirasense/scanditsdk/plugin/PickerStateMachine.java" target-dir="src/com/mirasense/scanditsdk/plugin"/>
+    <source-file src="src/android/com/mirasense/scanditsdk/plugin/ResultRelay.java" target-dir="src/com/mirasense/scanditsdk/plugin"/>
+    <source-file src="src/android/com/mirasense/scanditsdk/plugin/ScanditSDK.java" target-dir="src/com/mirasense/scanditsdk/plugin"/>
+    <source-file src="src/android/com/mirasense/scanditsdk/plugin/ScanditWorker.java" target-dir="src/com/mirasense/scanditsdk/plugin"/>
+    <source-file src="src/android/com/mirasense/scanditsdk/plugin/SearchBar.java" target-dir="src/com/mirasense/scanditsdk/plugin"/>
+    <source-file src="src/android/com/mirasense/scanditsdk/plugin/SubViewPickerController.java" target-dir="src/com/mirasense/scanditsdk/plugin"/>
+    <source-file src="src/android/com/mirasense/scanditsdk/plugin/SubViewPickerOrientationHandler.java" target-dir="src/com/mirasense/scanditsdk/plugin"/>
+    <source-file src="src/android/com/mirasense/scanditsdk/plugin/UIParamParser.java" target-dir="src/com/mirasense/scanditsdk/plugin"/>
+    <source-file src="src/android/com/mirasense/scanditsdk/plugin/PermissionHelper.java" target-dir="src/com/mirasense/scanditsdk/plugin"/>
+  </platform>
+</plugin>
